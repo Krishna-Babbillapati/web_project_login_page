@@ -8,8 +8,6 @@ async function getLoginCreds(event) {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (regex.test(password)) {
-        message.textContent = "Password is valid!";
-        message.className = "success";
         // proceed with login logic here
         try {
             const response = await fetch("/login", {
@@ -22,14 +20,15 @@ async function getLoginCreds(event) {
             console.log("Response:", data);
 
             if (data.success) {
-                alert("Login successful!");
+                message.textContent = "Login successful!";
+                message.className = "success";
                 window.open("pages/login.html", "_blank");
             } else {
-                alert("Login failed: " + data.message);
+                message.textContent = "Login failed: " + data.message;
             }
         } catch (error) {
                 console.error("Error:", error);
-                alert("Network or server error");
+                message.textContent = "Network or server error";
         }
     } else {
         message.textContent = "Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.";
