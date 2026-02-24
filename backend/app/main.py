@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from app.config import FRONTEND_DIR
-from app.routes import auth_router
+from app.routes import auth_router, admin_router
 
 
 def create_app() -> FastAPI:
@@ -16,8 +16,11 @@ def create_app() -> FastAPI:
         version="1.0.0"
     )
 
-    # Include authentication routes
+    # Include public authentication routes
     app.include_router(auth_router, tags=["auth"])
+    
+    # Include backend-only admin routes
+    app.include_router(admin_router, tags=["admin"])
 
     # Serve frontend static files at the root
     # Mount AFTER routes so API routes take precedence
