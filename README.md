@@ -117,7 +117,7 @@ The server will start at **http://localhost:8000/**
 ```json
 {
     "username": "admin",
-    "password": "secret"
+    "password": "*****"
 }
 ```
 
@@ -136,10 +136,6 @@ The server will start at **http://localhost:8000/**
     "message": "Invalid credentials"
 }
 ```
-
-### Default Credentials
-- **Username:** `admin`
-- **Password:** `secret`
 
 ### Interactive API Documentation
 
@@ -191,7 +187,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 ⚠️ **Current implementation is for development only.** Before production deployment:
 
-- [ ] Implement password hashing (bcrypt, argon2)
 - [ ] Add JWT or session-based authentication
 - [ ] Use HTTPS/TLS
 - [ ] Implement CORS properly (restrict origins)
@@ -226,23 +221,6 @@ Verify that the `FRONTEND_DIR` path in `backend/app/config.py` correctly points 
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Package Manager | pip |
 | Virtual Environment | venv |
-
-## Future Enhancements
-
-- [ ] User registration endpoint
-- [ ] Password reset functionality
-- [ ] Email verification
-- [ ] User profile management
-- [ ] Database integration
-- [ ] JWT token authentication
-- [ ] Frontend framework (React, Vue, etc.)
-- [ ] Unit tests and integration tests
-- [ ] Docker containerization
-- [ ] CI/CD pipeline
-
-## License
-
-This project is open source and available under the MIT License.
 
 ## Author
 
