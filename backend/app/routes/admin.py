@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.utils import hash_password
 from app.models.schemas import RegisterRequest, RegisterResponse, UpdateUserRequest, UpdateUserResponse, DeleteUserResponse, DeleteUserRequest
-from app.models.db_models import User, insert_any_user, update_user_password, delete_user as db_delete_user
+from app.models.db_models import User, insert_any_user, update_user_password, update_user_role, delete_user as db_delete_user
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -29,7 +29,7 @@ async def register(data: RegisterRequest, db: Session = Depends(get_db)) -> Regi
     Returns:
         RegisterResponse with success status and message
     """
-    insert_any_user(session=db, username=data.username, password=data.password)
+    insert_any_user(session=db, username=data.username, password=data.password, role=data.role)
     
     return RegisterResponse(success=True, message=f"User '{data.username}' registered successfully")
 
@@ -56,6 +56,28 @@ async def update_password(data: UpdateUserRequest, db: Session = Depends(get_db)
     return UpdateUserResponse(success=True, message=f"Password updated for user '{data.username}'")
 
 
+@router.post("/update-role", response_model=UpdateUserResponse)
+async def update_role(data: UpdateUserRequest, db: Session = Depends(get_db)) -> UpdateUserResponse:
+    """
+    Update user role endpoint (BACKEND ONLY).
+    
+    Args:
+        data: Updated user credentials (username and new role)
+        db: Database session
+    
+    Returns:
+        UpdateUserResponse with success status and message
+    """
+    try:
+        update_user_role(session=db, username=data.username, new_role=data.role)
+        if db.query(User).filter(User.user_name == data.username).first() is None:
+            return UpdateUserResponse(success=False, message=f"User '{data.username}' not found")
+    except Exception as e:
+        return UpdateUserResponse(success=False, message=f"Failed to update role: {str(e)}")
+    
+    return UpdateUserResponse(success=True, message=f"Role updated for user '{data.username}'")
+
+
 @router.post("/delete-user", response_model=DeleteUserResponse)
 async def delete_user(data: DeleteUserRequest, db: Session = Depends(get_db)) -> DeleteUserResponse:
     """
@@ -77,4 +99,3 @@ async def delete_user(data: DeleteUserRequest, db: Session = Depends(get_db)) ->
         return DeleteUserResponse(success=False, message=f"Failed to delete user: {str(e)}")
     
     return DeleteUserResponse(success=True, message=f"User '{data.username}' deleted successfully")
-

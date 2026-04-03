@@ -8,21 +8,22 @@ class User(Base):
     __tablename__ = "users"
     user_name = Column(String, unique=True, index=True, primary_key=True)
     password = Column(String)  # Stores bcrypt-hashed password
+    role = Column(String, default="db_admin")  # 'user' or 'admin'
 
 
 def insert_sample_user(session):
     """Insert a sample user into the database with hashed password."""
     # Hash the password before storing
     hashed_pwd = hash_password("secret")
-    sample_user = User(user_name="admin", password=hashed_pwd)
+    sample_user = User(user_name="admin", password=hashed_pwd, role="db_admin")
     session.add(sample_user)
     session.commit()
 
 
-def insert_any_user(session, username: str, password: str):
+def insert_any_user(session, username: str, password: str, role: str = "user"):
     """Insert a user with specified username and password (hashed)."""
     hashed_pwd = hash_password(password)
-    new_user = User(user_name=username, password=hashed_pwd)
+    new_user = User(user_name=username, password=hashed_pwd, role=role)
     session.add(new_user)
     session.commit()
 
@@ -32,6 +33,14 @@ def update_user_password(session, username: str, new_password: str):
     user = session.query(User).filter(User.user_name == username).first()
     if user:
         user.password = hash_password(new_password)
+        session.commit()
+
+
+def update_user_role(session, username: str, new_role: str):
+    """Update the role for a given user."""
+    user = session.query(User).filter(User.user_name == username).first()
+    if user:
+        user.role = new_role
         session.commit()
 
 
