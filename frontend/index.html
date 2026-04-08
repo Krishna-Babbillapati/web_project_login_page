@@ -1,21 +1,20 @@
 <html lang="en">
     <head>
-        <title>My Web Page</title>
+        <title>Pawsome</title>
         <meta charset="UTF-8">
-        <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+        <link rel="icon" href="assets/pawsome_icon.jpg" type="image/x-icon">
         <link rel="stylesheet" href="css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Gamja+Flower&family=Mynerve&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Welcome to Login Page</h1>
-        <p>This is a sample login page for home page</p>
-        <form onsubmit="getLoginCreds(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password"><br><br>
-            <div id="message"></div>
-            <button type="submit">Submit</button>
-        </form>
+        <img src="./assets/home_page_bg.jpg" alt="Background Image">
+        <div id="main-content">
+            <h1 id="main-title">'Paw'some!</h1>
+            <p id="main-description">Our paw friends are waiting for you! 
+            Join the community to help pets to find their forever homes. You can adopt, foster, or volunteer!</p>
+        </div>
+        <!-- <h2>Ready to join the community? Register new user or login</h2> -->
+        <button id="register-btn" onclick="window.location.href='./pages/login.html'">Want To Join Us</button>
         <script src="js/script.js"></script>
     </body>
 </html>
