@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/pawsome_icon.jpg" type="image/svg+xml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Gamja+Flower&family=Mynerve&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="icon" href="../assets/pawsome_icon.jpg" type="image/svg+xml">
         <link rel="stylesheet" href="../css/register_styles.css">
-    <title>Register User | Pawsome</title>
-</head>
-<body>
-    
-</body>
+        <title>Register User | Pawsome</title>
+    </head>
+    <body>
+        <form onsubmit="handleRegister(event)">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name"><br>
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br>
+            <label for="role">User Type:</label><br>
+            <div id="user-role-opt">
+                <input type="radio" id="user" name="role" value="user" checked>
+                <label for="user">User</label>
+            </div>
+            <div id="admin-role-opt">
+                <input type="radio" id="admin" name="role" value="admin">
+                <label for="admin">Admin</label>
+            </div>
+            <label for="password">New Password:</label>
+            <input type="password" id="password" name="password"><br>
+            <label for="re_password">Re Enter Same Password:</label>
+            <input type="password" id="re_password" name="re_password"><br>
+            <label for="city">Enter City:</label>
+            <input type="text" id="city" name="city"><br>
+            <label for="state">Enter State:</label>
+            <input type="text" id="state" name="state"><br>
+            <label for="country">Enter Country:</label>
+            <input type="text" id="country" name="country"><br><br>
+            <div id="message"></div>
+            <button id="register-btn" type="submit">Register</button>
+        </form>
+        <script src="../js/register.js"></script>
+    </body>
 </html>

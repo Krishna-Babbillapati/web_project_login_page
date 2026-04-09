@@ -22,7 +22,7 @@ async function getLoginCreds(event) {
             if (data.success) {
                 message.textContent = "Login successful!";
                 message.className = "success";
-                window.open("pages/login.html", "_blank");
+                window.open("/pages/home_page.html", "_self");
             } else {
                 message.textContent = "Login failed: " + data.message;
                 message.className = "error";
