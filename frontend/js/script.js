@@ -22,13 +22,15 @@ async function getLoginCreds(event) {
             if (data.success) {
                 message.textContent = "Login successful!";
                 message.className = "success";
-                window.open("pages/login.html", "_blank");
+                window.open("/pages/home_page.html", "_self");
             } else {
                 message.textContent = "Login failed: " + data.message;
+                message.className = "error";
             }
         } catch (error) {
                 console.error("Error:", error);
                 message.textContent = "Network or server error";
+                message.className = "error";
         }
     } else {
         message.textContent = "Password must be at least 8 characters long, include uppercase, lowercase, number, and special character.";

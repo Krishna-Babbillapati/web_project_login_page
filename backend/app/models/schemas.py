@@ -10,7 +10,7 @@ class LoginRequest(BaseModel):
     password: str = Field(..., min_length=1, description="Password")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "username": "admin",
                 "password": "secret"
@@ -28,12 +28,14 @@ class RegisterRequest(BaseModel):
     """Register request schema."""
     username: str = Field(..., min_length=1, description="Username")
     password: str = Field(..., min_length=1, description="Password")
+    role: str = Field(..., description="User role")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "username": "admin",
-                "password": "secret"
+                "password": "secret",
+                "role": "db_admin"
             }
         }
 
@@ -48,9 +50,10 @@ class UpdateUserRequest(BaseModel):
     """Update user request schema."""
     username: str = Field(..., min_length=1, description="Username")
     password: str = Field(..., min_length=1, description="Password")
+    role: str = Field(default="user", description="User role (optional)")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "username": "admin",
                 "password": "secret"
@@ -69,7 +72,7 @@ class DeleteUserRequest(BaseModel):
     username: str = Field(..., min_length=1, description="Username")
 
     class Config:
-        schema_extra = {
+        json_schema_extra = {
             "example": {
                 "username": "admin"
             }
